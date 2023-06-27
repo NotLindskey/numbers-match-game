@@ -1,5 +1,6 @@
 console.log('Match the numbers!');
 
+// array of images
 const images = [
   {
     image_name: 'bananas.jpg',
@@ -83,10 +84,45 @@ const images = [
   },
 ];
 
-const randomNumber = Math.floor(Math.random() * images.length);
-const randomImageName = images[randomNumber].image_name;
-const imageContainer = document.getElementById('imageContainer');
+// stop timer
+const generate = () => {
+  if (images.length === 0) {
+    stopTimer();
+    return;
+  }
 
-const image = document.createElement('img');
-image.src = `images/${randomImageName}`;
-imageContainer.appendChild(image);
+  const setImageSrc = (randomImageName) => {
+    const imageContainer = document.getElementById('imageContainer');
+
+    if (imageContainer.hasChildNodes()) {
+      imageContainer.removeChild(imageContainer.firstElementChild);
+    }
+    // display a random image
+    const image = document.createElement('img');
+    image.src = `images/${randomImageName}`;
+    imageContainer.appendChild(image);
+  };
+
+  // generate a random image
+  const randomNumber = Math.floor(Math.random() * images.length);
+  const randomImageName = images[randomNumber].image_name;
+  setImageSrc(randomImageName);
+
+  images.splice(randomNumber, 1);
+};
+
+let timerRef;
+// start timer
+const timer = () => {
+  timerRef = setInterval(generate, 200);
+};
+
+// start game
+const play = () => {
+  generate();
+  timer();
+};
+
+const stopTimer = () => {
+  clearInterval(timerRef);
+};
