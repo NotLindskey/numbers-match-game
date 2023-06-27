@@ -83,4 +83,10 @@ const images = [
   },
 ];
 
+const randomNumber = Math.floor(Math.random() * images.length);
+const randomImageName = images[randomNumber].image_name;
+const imageContainer = document.getElementById('imageContainer');
 
+const image = document.createElement('img');
+image.src = `images/${randomImageName}`;
+imageContainer.appendChild(image);
