@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- game area -->
     <main id="game-area">
+      <!-- stats area -->
       <div class="stats">
         <div id="statsContent">
           <h3>
@@ -24,9 +26,11 @@
           </div>
         </div>
       </div>
+      <!-- end of stats area -->
+      <!-- image area -->
       <div class="imageArea">
         <h3 id="message"></h3>
-        <!-- <div id="startScreen">
+        <div id="startScreen">
           <h1>Welcome to the <em>Number Match</em> game...</h1>
           <em class="space-y">the rules are simple.</em>
           <p class="space-y">
@@ -37,13 +41,13 @@
           <p class="space-y">
             You have <span id="timeSetting"></span> seconds to decide.
           </p>
-          <button id="play-button">Play!</button>
-        </div> -->
-        <div id="imageContainer">
-          <img src="/images/macaroons.jpg" alt="" />
+          <button id="play-button" onClick="play()">Play!</button>
         </div>
+        <div id="imageContainer"></div>
       </div>
+      <!-- end of image area -->
     </main>
+    <!-- end of game area -->
     <script src="script.js"></script>
   </body>
 </html>
