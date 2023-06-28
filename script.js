@@ -84,7 +84,24 @@ const images = [
   },
 ];
 
-// stop timer
+const generateDisplayNumber = (numberOfItems, plusOrMinus) => {
+  const split = Math.floor(Math.random() * 2);
+  if (split === 0) {
+    // display real number
+    document.getElementById('number').innerHTML = numberOfItems;
+  } else {
+    // display one higher or one lower
+    document.getElementById('number').innerHTML = `${
+      numberOfItems + plusOrMinus
+    }`;
+  }
+};
+
+const generatePlusOrMinus = () => {
+  const number0to1 = Math.floor(Math.random() * 2);
+  return number0to1 === 0 ? -1 : +1;
+};
+
 const generate = () => {
   if (images.length === 0) {
     stopTimer();
@@ -93,31 +110,28 @@ const generate = () => {
 
   const setImageSrc = (randomImageName) => {
     const imageContainer = document.getElementById('imageContainer');
-
     if (imageContainer.hasChildNodes()) {
       imageContainer.removeChild(imageContainer.firstElementChild);
     }
-    // display a random image
     const image = document.createElement('img');
     image.src = `images/${randomImageName}`;
     imageContainer.appendChild(image);
   };
 
-  // generate a random image
   const randomNumber = Math.floor(Math.random() * images.length);
   const randomImageName = images[randomNumber].image_name;
   setImageSrc(randomImageName);
-
+  const plusOrMinus = generatePlusOrMinus();
+  const numberOfItems = images[randomNumber].number_of_items;
+  generateDisplayNumber(numberOfItems, plusOrMinus);
   images.splice(randomNumber, 1);
 };
 
 let timerRef;
-// start timer
 const timer = () => {
-  timerRef = setInterval(generate, 200);
+  timerRef = setInterval(generate, 3000);
 };
 
-// start game
 const play = () => {
   generate();
   timer();
