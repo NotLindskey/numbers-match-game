@@ -84,10 +84,16 @@ const images = [
   },
 ];
 
+const timeDelay = 3000;
 let currentImageValue = 0,
   displayNumber = 0,
   score = 0,
   totalAvailable = images.length;
+
+document.getElementById('statsContent').style.visibility = 'hidden';
+document.getElementById('currentScore').innerHTML = score;
+document.getElementById('totalAvailable').innerHTML = totalAvailable;
+document.getElementById('timeSetting').innerHTML = timeDelay / 1000;
 
 const setImageSrc = (randomImageName) => {
   const imageContainer = document.getElementById('imageContainer');
@@ -154,18 +160,21 @@ const noMatch = () => {
 
 let timerRef;
 const timer = () => {
-  timerRef = setInterval(generate, 200);
+  timerRef = setInterval(generate, timeDelay);
 };
 
 const play = () => {
   document.getElementById('message').style.display = 'none';
   document.getElementById('startScreen').style.display = 'none';
   document.getElementById('play-button').style.display = 'none';
+  document.getElementById('statsContent').style.visibility = 'visible';
+
   generate();
   timer();
 };
 
 const endOfGame = () => {
+  document.getElementById('statsContent').style.visibility = 'hidden';
   document.getElementById('message').style.display = 'block';
   document.getElementById('imageContainer').style.display = 'none';
   document.getElementById('statsContent').style.display = 'none';
