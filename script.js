@@ -88,7 +88,8 @@ const timeDelay = 3000;
 let currentImageValue = 0,
   displayNumber = 0,
   score = 0,
-  totalAvailable = images.length;
+  totalAvailable = images.length,
+  chosen = false;
 
 document.getElementById('statsContent').style.visibility = 'hidden';
 document.getElementById('currentScore').innerHTML = score;
@@ -137,7 +138,7 @@ const generate = () => {
     stopTimer();
     return;
   }
-
+  chosen = false;
   const randomNumber = Math.floor(Math.random() * images.length);
   const randomImageName = images[randomNumber].image_name;
   setImageSrc(randomImageName);
@@ -149,13 +150,19 @@ const generate = () => {
 };
 
 const match = () => {
-  currentImageValue === displayNumber ? score++ : score--;
-  document.getElementById('currentScore').innerHTML = score;
+  if (!chosen) {
+    currentImageValue === displayNumber ? score++ : score--;
+    chosen = true;
+    document.getElementById('currentScore').innerHTML = score;
+  }
 };
 
 const noMatch = () => {
-  currentImageValue !== displayNumber ? score++ : score--;
-  document.getElementById('currentScore').innerHTML = score;
+  if (!chosen) {
+    currentImageValue !== displayNumber ? score++ : score--;
+    chosen = true;
+    document.getElementById('currentScore').innerHTML = score;
+  }
 };
 
 let timerRef;
