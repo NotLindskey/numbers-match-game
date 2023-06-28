@@ -103,6 +103,7 @@ const setImageSrc = (randomImageName) => {
   }
   const image = document.createElement('img');
   image.src = `images/${randomImageName}`;
+  image.classList.add('fade');
   imageContainer.appendChild(image);
 };
 
@@ -188,7 +189,7 @@ const endOfGame = () => {
   document.getElementById(
     'message'
   ).innerHTML = `Game over, your score was ${score} / ${totalAvailable}`;
-  setTimeout(() => location.reload(), 3000);
+  setTimeout(() => location.reload(), 3200);
 };
 
 const stopTimer = () => {
