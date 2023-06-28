@@ -84,22 +84,34 @@ const images = [
   },
 ];
 
+let currentImageValue = 0,
+  displayNumber = 0,
+  score = 0;
+
 const generateDisplayNumber = (numberOfItems, plusOrMinus) => {
   const split = Math.floor(Math.random() * 2);
   if (split === 0) {
     // display real number
     document.getElementById('number').innerHTML = numberOfItems;
+    displayNumber = numberOfItems;
   } else {
     // display one higher or one lower
     document.getElementById('number').innerHTML = `${
       numberOfItems + plusOrMinus
     }`;
+    displayNumber = numberOfItems + plusOrMinus;
   }
+  currentImageValue = numberOfItems;
 };
 
 const generatePlusOrMinus = () => {
   const number0to1 = Math.floor(Math.random() * 2);
   return number0to1 === 0 ? -1 : +1;
+};
+
+const setImageName = (randomImageName) => {
+  const imageName = randomImageName.slice(0, randomImageName.length - 4);
+  document.getElementById('item-name').innerHTML = imageName + '?';
 };
 
 const generate = () => {
@@ -121,15 +133,26 @@ const generate = () => {
   const randomNumber = Math.floor(Math.random() * images.length);
   const randomImageName = images[randomNumber].image_name;
   setImageSrc(randomImageName);
+  setImageName(randomImageName);
   const plusOrMinus = generatePlusOrMinus();
   const numberOfItems = images[randomNumber].number_of_items;
   generateDisplayNumber(numberOfItems, plusOrMinus);
   images.splice(randomNumber, 1);
 };
 
+const match = () => {
+  currentImageValue === displayNumber ? score++ : score--;
+  document.getElementById('currentScore').innerHTML = score;
+};
+
+const noMatch = () => {
+  currentImageValue !== displayNumber ? score++ : score--;
+  document.getElementById('currentScore').innerHTML = score;
+};
+
 let timerRef;
 const timer = () => {
-  timerRef = setInterval(generate, 3000);
+  timerRef = setInterval(generate, 5000);
 };
 
 const play = () => {
