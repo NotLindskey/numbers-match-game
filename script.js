@@ -86,7 +86,18 @@ const images = [
 
 let currentImageValue = 0,
   displayNumber = 0,
-  score = 0;
+  score = 0,
+  totalAvailable = images.length;
+
+const setImageSrc = (randomImageName) => {
+  const imageContainer = document.getElementById('imageContainer');
+  if (imageContainer.hasChildNodes()) {
+    imageContainer.removeChild(imageContainer.firstElementChild);
+  }
+  const image = document.createElement('img');
+  image.src = `images/${randomImageName}`;
+  imageContainer.appendChild(image);
+};
 
 const generateDisplayNumber = (numberOfItems, plusOrMinus) => {
   const split = Math.floor(Math.random() * 2);
@@ -116,19 +127,10 @@ const setImageName = (randomImageName) => {
 
 const generate = () => {
   if (images.length === 0) {
+    endOfGame();
     stopTimer();
     return;
   }
-
-  const setImageSrc = (randomImageName) => {
-    const imageContainer = document.getElementById('imageContainer');
-    if (imageContainer.hasChildNodes()) {
-      imageContainer.removeChild(imageContainer.firstElementChild);
-    }
-    const image = document.createElement('img');
-    image.src = `images/${randomImageName}`;
-    imageContainer.appendChild(image);
-  };
 
   const randomNumber = Math.floor(Math.random() * images.length);
   const randomImageName = images[randomNumber].image_name;
@@ -152,12 +154,25 @@ const noMatch = () => {
 
 let timerRef;
 const timer = () => {
-  timerRef = setInterval(generate, 5000);
+  timerRef = setInterval(generate, 200);
 };
 
 const play = () => {
+  document.getElementById('message').style.display = 'none';
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('play-button').style.display = 'none';
   generate();
   timer();
+};
+
+const endOfGame = () => {
+  document.getElementById('message').style.display = 'block';
+  document.getElementById('imageContainer').style.display = 'none';
+  document.getElementById('statsContent').style.display = 'none';
+  document.getElementById(
+    'message'
+  ).innerHTML = `Game over, your score was ${score} / ${totalAvailable}`;
+  setTimeout(() => location.reload(), 3000);
 };
 
 const stopTimer = () => {
