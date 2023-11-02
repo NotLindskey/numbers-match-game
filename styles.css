@@ -37,26 +37,40 @@ h3 {
 .items {
   font-size: 2rem;
 }
-
-button {
+.match-btn {
   width: 12rem;
   border: none;
   border-radius: 3rem;
   padding: 1.2rem;
-  background: #ffffff;
-  border: 3px solid #a1e0e4;
+  background: green;
+  border: 3px solid black;
   cursor: pointer;
   transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 }
 
-button:hover {
-  color: #ffffff;
-  background-color: #6d6d6d;
+.match-btn:hover {
+  background-color: rgb(148, 237, 148);
 }
 
-button:nth-child(2) {
-  border: 3px solid rgb(241, 152, 152);
+.no-match-btn {
+  width: 12rem;
+  border: none;
+  border-radius: 3rem;
+  padding: 1.2rem;
+  background: red;
+  border: 3px solid black;
+  margin-top: 6px;
+  cursor: pointer;
+  transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 }
+
+.no-match-btn:hover {
+  background-color: rgb(224, 136, 136);
+}
+
+/* button:nth-child(2) {
+  border: 3px solid rgb(241, 152, 152);
+} */
 
 .stats {
   background: #6d6d6d;
