@@ -24,18 +24,11 @@ html {
   padding: 3rem;
 }
 
-/* make some edits to this */
 #message {
+  color: #ffffff;
   padding: 100px;
   font-size: 50px;
-  border: grey solid 3px;
 }
-
-/* .message-area {
-  color: white;
-  border: purple solid 3px;
-  font-size: 100px;
-} */
 
 h1 {
   margin-top: 0;
@@ -80,10 +73,6 @@ h3 {
 .no-match-btn:hover {
   background-color: rgb(224, 136, 136);
 }
-
-/* button:nth-child(2) {
-  border: 3px solid rgb(241, 152, 152);
-} */
 
 .stats {
   background: #6d6d6d;
